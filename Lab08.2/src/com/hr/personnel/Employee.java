@@ -36,6 +36,7 @@ public abstract class Employee {
     }
 
     // business methods
+
     public void work() {
         System.out.println(getName() + " working hard since " + getHireDate());
     }
@@ -43,7 +44,7 @@ public abstract class Employee {
     /*
      * We declare THAT "all employees get paid. " BUT we can't implement it here.
      * It's all about the 'WHAT"  and not the "HOW."
-     * we simply have no finicail dat to come up with a dollar figure
+     * we simply have no finical dat to come up with a dollar figure
      */
     public abstract void pay();
 

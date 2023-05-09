@@ -58,6 +58,21 @@ public class Department {
             employees[i].pay();
         }
     }
+    /*
+     * "Forced" holiday break.
+     * For all salary employees make them take vacation.
+     */
+    public void holidayBreak() {
+        for (int i = 0; i < currentIndex; i++) {
+            // if employees[i] is really a Salaried Employee object, then
+            // "downcast" the Employee reference to more specific type SalariedEmployee
+            // NOTE: we must check for the correct type before the downcast
+            if (employees[i] instanceof SalariedEmployee) {
+                SalariedEmployee semp = (SalariedEmployee) employees[i];
+                semp.takeVacation();
+            }
+        }
+    }
 
     // helper method to add an Employee to the array
     public void addEmployee(Employee emp) {
