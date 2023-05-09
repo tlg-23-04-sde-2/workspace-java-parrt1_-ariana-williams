@@ -21,6 +21,7 @@ public class HourlyEmployee extends Employee {
         setHours(hours);
     }
     //business methods or action methods
+    @Override
     public void pay() {
         double payment = getRate() * getHours(); // calculates the total payment for the hours worked
         System.out.println(getName() + " is paid hourly " + payment);
