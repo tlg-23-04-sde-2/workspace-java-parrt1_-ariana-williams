@@ -7,6 +7,7 @@ import java.time.LocalDate;
 public class SalariedEmployee extends Employee {
     //instance variables
     private double salary;
+    private final double SALARY_STANDARD_DEDUCTION =  10_000.0;
 
     //constructors
     public SalariedEmployee() {
@@ -29,6 +30,11 @@ public class SalariedEmployee extends Employee {
 
     public void takeVacation() {
         System.out.printf("%s is on vacation\n", getName());
+    }
+
+    @Override
+    public double getStandardDeduction() {
+        return SALARY_STANDARD_DEDUCTION;
     }
 
     //accessor methods
