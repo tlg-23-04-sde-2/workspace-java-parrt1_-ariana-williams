@@ -22,6 +22,7 @@ public class Television {
     private int oldVolume;
 
 
+
     // constructor
     public Television() {
         instanceCount++;
@@ -32,17 +33,20 @@ public class Television {
         setBrand(brand);
     }
 
-    public Television(String brand, int volume) throws IllegalArgumentException {
+    public Television(String brand, int volume) throws InvalidVolumeException {
         this(brand);
         setVolume(volume);
     }
 
-    public Television(String brand, int volume, DisplayType display) throws IllegalArgumentException {
+    public Television(String brand, int volume, DisplayType display) throws InvalidVolumeException {
         this(brand, volume);
         setDisplay(display);
     }
 
+
+
     // business methods or operations
+
     // method when turning on Television
     public void turnOn() {
         boolean isConnected = verifyInternetConnection();
@@ -62,10 +66,11 @@ public class Television {
             isMuted = true;
         }
         else {
-            setVolume(oldVolume);
+            volume = oldVolume;
             isMuted = false;
         }
     }
+
 
 
     // accessor methods (get/set)
@@ -104,16 +109,18 @@ public class Television {
         return volume;
     }
 
-    public void setVolume(int volume) throws IllegalArgumentException {
+    public void setVolume(int volume) throws InvalidVolumeException{
         if (volume >= MIN_VOLUME && volume <= MAX_VOLUME ) {
             this.volume = volume;
-
             isMuted = false;
         }
         else {
-            throw new IllegalArgumentException("Volume " + volume + " is an invalid volume " +
-                    "select a number from " +
-                    MIN_VOLUME + " and " + MAX_VOLUME);
+            throw new InvalidVolumeException(String.format(
+                    "Invalid volume: %s. Valid range is %s to %s.", volume, MIN_VOLUME, MAX_VOLUME
+            ));
+
+//            throw new IllegalArgumentException("Volume " + volume + " is an invalid volume select a number from " +
+//                    MIN_VOLUME + " and " + MAX_VOLUME);
         }
     }
 
@@ -140,7 +147,8 @@ public class Television {
     // toString method
     public String toString() {
         String volumeString = isMuted() ? "<muted>" : String.valueOf(getVolume());
-        return "Television: " + getBrand() + " Volume set to: " + volumeString + " Tv display: " + display;
+        return String.format("Television: brand=%s, volume=%s, display=%s", getBrand(),getVolume(),
+                getDisplay());
 
     }
 }
