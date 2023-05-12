@@ -8,8 +8,9 @@
 
 package com.poetry.io;
 
-import java.io.BufferedReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class PoemClient {
 
@@ -17,8 +18,8 @@ public class PoemClient {
      * To run one method at a time, uncomment the call to the one you want to execute.
      */
     public static void main(String[] args) {
-        // readPoem();
-        // writePoem();
+         readPoem();
+//         writePoem();
     }
 
     /**
@@ -35,26 +36,45 @@ public class PoemClient {
      */
     private static void readPoem() {
         // TODO: initialize 'reader' variable and complete the try block
-        try (BufferedReader reader = null) {
+        try {
+            String poem = Files.readString(Path.of("famous-poem.txt"));
+            System.out.println(poem);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       /*
+        try (BufferedReader reader = new BufferedReader(new FileReader("famous-poem.txt"))) {
 
+            String line;
+            while ( (line = reader.readLine()) != null) { // when line is null, EOF
+                System.out.println(line);
+            }
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+        */
     }
 
     /**
      * TASK: write a Haiku to file 'haiku.txt'.
      *
      * A Haiku is a 3-line poem with the following characteristics:
-     *  1st line is 5 syllables
-     *  2nd line is 7 syllables
-     *  3rd line is 5 syllables
+     *  1st line is 5 syllables I am programming
+     *  2nd line is 7 syllables sometimes hard others easy
+     *  3rd line is 5 syllables always fun learning
      *
      * Use a PrintWriter wrapped around a FileWriter.
      * Use a try-with-resources to initialize the stream and auto-close it.
      */
     private static void writePoem() {
-        // TODO
+        try (PrintWriter writer = new PrintWriter((new FileWriter("haiku.txt")))) {
+            writer.println("I am programming");
+            writer.println("sometimes hard others easy");
+            writer.println("always fun learning");
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
